@@ -74,48 +74,60 @@
 ## Create a vector of 100 employees ("Employee 1", "Employee 2", ... "Employee
 ## 100")
 ## Hint: use 'paste()` or `str_c`
-
+employee_num <- c(1:100)
+employee_name <- c("Employee")
+name <- paste(employee_name, employee_num)
+name
 
 ## Create a random vector of their 2021 salaries.
 ## Hint: you may use the runif function to create uniform random numbers,
 ## e.g. 'runif(100, 60, 120)' creates 100 random numbers between 60 and 120
-
+salaries_21 <- runif(100, 60, 120)
+salaries_21
 
 ## Create a random vector of 2022 salaries that are typically
 ## higher than the 2014 salaires (use runif again).
 ## For instance, if you create random numbers between 65 and 130, then 2022
 ## salaries tend to be larger than 2021 salaries.
-
+salaries_22 <- runif(100, 65, 130)
+salaries_22
 
 ## Create a data.frame 'salaries' by combining the vectors you just made
-
+salaries <- data.frame(name, salaries_21, salaries_22)
+View(salaries)
 
 ## Create a column 'raise' that stores the size of the
 ## raise between 2021 and 2022
-
+salaries$raise <- salaries_22 - salaries_21
 
 ## Retrieve values from your data frame to answer the following questions:
 ##
-## What was the 2015 salary of employee 57
-
+## What was the 2021 salary of employee 57
+employee_57 <- salaries[salaries$name == "Employee 57", "salaries_21"]
 
 ## Now round the answer down to two digits after comma
 ## check out 'round()' function
-
+round(employee_57, 2)
 
 ## How many employees got a raise?
-
+nrow(salaries[salaries$raise > 0, ])
 
 ## What was the value of the highest raise?
 ## Round the number to two digits!
-
+max_raise <- max(salaries$raise)
+max_raise_rounded = round(max_raise, 2)
 
 ## What was the name of the employee who recieved the highest raise?
-
+salaries[salaries$raise == max_raise, "name"]
 
 ## What was the average salary increase?
 ## Round the number!
-
+avg_increase <- mean(salaries[salaries$raise > 0, "raise"])
+rounded_avg <- round(avg_increase, 2)
+rounded_avg
 
 ## For people who did not get a raise, how much money did they lose?
 ## Round the number!
+losses <- salaries[salaries$raise <= 0, "raise"]
+rounded_losses <- round(losses, 2)
+rounded_losses
