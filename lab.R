@@ -81,10 +81,8 @@ for(name in names(scores)) {
   is_num <- is.numeric(scores[, name])
   if (is_num) {
     avg <- mean(scores[, name])
-  } else {
-    avg <- "N/A"
+    cat("Average", name, avg, "\n")
   }
-  cat(name, avg, "\n")
 }
 
 ##
